@@ -1,9 +1,10 @@
 import React from 'react'
+import './Rightbar.css'
 
 export const Rightbar = () => {
   return (
     <>
-         Rightbar
+         <div className="rightbar">Rightbar</div>
     </>
   );
 };
