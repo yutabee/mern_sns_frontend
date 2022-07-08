@@ -1,8 +1,21 @@
 import { MoreVert } from '@mui/icons-material';
-import React from 'react'
+import React, { useState } from 'react'
 import './Post.css'
+import { Users } from '../../dummyData'
 
-export const Post = () => {
+export const Post = ({ post }) => {
+    // const user = Users.filter( user => user.id === 1); 
+    // console.log(user);
+    // console.log(post);
+
+    const [like, setLike] = useState(post.like);
+    const [isLiked, setIsLiked] = useState(false);
+
+    const handleLike = () => {
+        setLike(isLiked ? like - 1 : like + 1);
+        setIsLiked(!isLiked);
+    }
+
   return (
     <>
           <div className="post">
@@ -10,27 +23,27 @@ export const Post = () => {
                   <div className="postTop">
                       <div className="postTopLeft">
                            <img src="./assets/person/1.jpeg" alt="" className='postProfileImg' />
-                      <span className='postUserName'>Yuuuuta</span>
-                      <span className='postDate'>5分前</span>
+                          <span className='postUserName'>{ Users.filter(user=>user.id===post.userId)[0].username }</span>
+                          <span className='postDate'>{post.date}</span>
                       </div> 
                     <div className="postTopRight">
                         <MoreVert />
                     </div>
                   </div>
                   <div className="postCenter">
-                      <span className='postText'>SNS自作中です</span>
-                      <img src="./assets/post/1.jpeg" alt="" className='postImg' />
+                      <span className='postText'>{post.desc}</span>
+                      <img src={post.photo} alt="" className='postImg' />
                   </div>
                   <div className="postBottom">
                       <div className="postBottomLeft">
-                          <img src="./assets/heart.png" alt="" className='likeIcon' />
+                          <img src="./assets/heart.png" alt="" className='likeIcon' onClick={()=>handleLike()} />
                           <span className="postLikeCounter">
-                              5人がいいねを押しました
+                              {like}人がいいねを押しました
                           </span>
                       </div>
                       <div className="postBottomRight">
                           <span className="postCommentText">
-                              4コメント
+                              {post.comment}コメント
                           </span>
                       </div>
                   </div>

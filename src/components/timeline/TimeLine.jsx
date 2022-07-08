@@ -1,7 +1,8 @@
 import React from 'react'
 import { Post } from '../post/Post';
 import { Share } from '../share/Share';
-import './TimeLine.css'
+import './TimeLine.css';
+import { Posts } from '../../dummyData';
 
 export const TimeLine = () => {
   return (
@@ -9,7 +10,9 @@ export const TimeLine = () => {
         <div className="timeline">
               <div className="timelineWapper">
                   <Share />
-                  <Post />
+          {Posts.map((post) => (
+            <Post post={post} key={post.id} />
+          ))} 
               </div> 
         </div>
     </>
