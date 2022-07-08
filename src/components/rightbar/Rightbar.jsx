@@ -14,20 +14,23 @@ export const Rightbar = () => {
           <h4 className="rightbarTitle">オンラインの友達</h4>
           <ul className='rightbarFriendList'>
             <li className="rightbarFriend">
-                <div className="rightbarProfileImgContainer">
+                <div className="rightbarFriendImgContainer">
                   <img src="assets/person/1.jpeg" alt="" className='rightbarProfileImg' />
                   <span className="rightbarOnline"></span>
                 </div>
                 <span className="rightbarUsername">Yuuuuta</span>
             </li>
              <li className="rightbarFriend">
-                <div className="rightbarProfileImgContainer">
+                <div className="rightbarFriendImgContainer">
                   <img src="assets/person/2.jpeg" alt="" className='rightbarProfileImg' />
                   <span className="rightbarOnline"></span>
                 </div>
                 <span className="rightbarUsername">tanaka</span>
             </li>
           </ul>
+          <p className='promotionTitle'>プロモーション広告</p>
+          <img src="assets/promotion/promotion1.jpeg" alt="" className='rightbarPromotionImg' />
+          <p className="promotionName">ショッピング</p>
         </div>
       </div>
     </>
