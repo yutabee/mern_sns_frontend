@@ -3,11 +3,11 @@ import { Users } from '../../dummyData';
 import { Online } from '../online/Online';
 import './Rightbar.css'
 
-export const Rightbar = () => {
-  return (
-    <>
-      <div className="rightbar">
-        <div className="rightbarWrapper">
+export const Rightbar = ({ profile }) => {
+  
+  const HomeRightbar = () => {
+    return (
+      <>
           <div className="eventContainer">
             <img src="assets/star.png" alt="" className='starImg' />
             <span className='eventText'><b>フォロワー限定</b>イベント開催中！</span>
@@ -21,9 +21,46 @@ export const Rightbar = () => {
           </ul>
           <p className='promotionTitle'>プロモーション広告</p>
           <img src="assets/promotion/promotion1.jpeg" alt="" className='rightbarPromotionImg' />
-          <p className="promotionName">ショッピング</p>
-        </div>
+        <p className="promotionName">ショッピング</p>
+      </>
+  )
+}
+
+  const ProfileRightbar = () => {
+    return (
+      <>
+        <h4 className='rightbarTitle'>ユーザー情報</h4>
+         <div className="rightbarInfo">
+                <div className="rightbarInfoItem">
+                    <span className='rightbarInfoKey'>出身</span>
+                    <span className='rightbarInfoKey'>福岡</span>
+                </div>
+                <h4 className='rightbarTitle'>あなたの友達</h4>
+                <div className="rightbarFollowings">
+                    <div className="rightbarFollowing">
+                        <img src="assets/person/1.jpeg" alt="" className='rightbarFollowingImg' />
+                        <span className='rightbarFollowingName'>Yuuuuuta</span>
+            </div>
+              <div className="rightbarFollowing">
+                        <img src="assets/person/1.jpeg" alt="" className='rightbarFollowingImg' />
+                        <span className='rightbarFollowingName'>Yuuuuuta</span>
+            </div>
+              <div className="rightbarFollowing">
+                        <img src="assets/person/1.jpeg" alt="" className='rightbarFollowingImg' />
+                        <span className='rightbarFollowingName'>Yuuuuuta</span>
+            </div>
+                </div>
+         </div>    
+      </>
+  )
+}
+  
+  
+  return (
+    <div className="rightbar">
+      <div className="rightbarWrapper">
+        {profile? <ProfileRightbar /> : <HomeRightbar/> }
       </div>
-    </>
+    </div>
   );
 };
