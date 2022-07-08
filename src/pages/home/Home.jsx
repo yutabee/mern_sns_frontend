@@ -8,16 +8,11 @@ import './Home.css'
 export const Home = () => {
   return (
     <>
-        <Topbar />
+      <Topbar />
       <div className="homeContainer">
         <Sidebar />
-          <div className="profileRight">
-              <div className="profileRightTop">ddkjfkf</div>
-              <div className="profileRightTop">
-                  <TimeLine/>
-                  <Rightbar/>
-              </div>   
-          </div>  
+        <TimeLine/>
+        <Rightbar />
       </div>    
     </>
   );
