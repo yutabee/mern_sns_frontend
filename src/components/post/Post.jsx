@@ -1,7 +1,10 @@
 import { MoreVert } from '@mui/icons-material';
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import './Post.css'
-import { Users } from '../../dummyData'
+import { format } from 'timeago.js';
+import { Link } from 'react-router-dom';
+// import { Users } from '../../dummyData'
 
 export const Post = ({ post }) => {
     // const user = Users.filter( user => user.id === 1); 
@@ -9,10 +12,23 @@ export const Post = ({ post }) => {
     // console.log(post);
 
     const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER; 
-
-    const [like, setLike] = useState(post.like);
+    
+    //いいねのstate管理
+    const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
+    //apiのユーザー情報を格納するstate
+    const [user, setUser] = useState({});    
 
+    useEffect(() => {                      //apiの読み込みは画面を読み込んだとき1回でok
+        const fetchUser = async () => {     //useEffectは直接asyncを付けられない
+        const response = await axios.get(`/users/?userId=${post.userId}`);  //endpoint proxy設定しているので/userからでOK
+        // console.log(response);
+        setUser(response.data);  //apiのresのdataをset
+        };
+        fetchUser();  //忘れず呼び出す
+    }, [post.userId]);  //第2引数は関心のあるstateや変数を格納できる,今回はなし.からのままだとEsLintに怒られるけどOK
+
+    //いいね実装
     const handleLike = () => {
         setLike(isLiked ? like - 1 : like + 1);
         setIsLiked(!isLiked);
@@ -24,9 +40,11 @@ export const Post = ({ post }) => {
               <div className="postWrapper">
                   <div className="postTop">
                       <div className="postTopLeft">
-                          <img src={ PUBLIC_FOLDER + "/person/1.jpeg"} alt="" className='postProfileImg' />
-                          <span className='postUserName'>{ Users.filter(user=>user.id===post.userId)[0].username }</span>
-                          <span className='postDate'>{post.date}</span>
+                          <Link to={`/profile/${user.username}`}>
+                              <img src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'} alt="" className='postProfileImg' />
+                           </Link>
+                          <span className='postUserName'>{ user.username }</span>
+                          <span className='postDate'>{format(post.createdAt )}</span>  {/* timeago->formatで時間表示をいい感じにする */}
                       </div> 
                     <div className="postTopRight">
                         <MoreVert />
@@ -34,7 +52,7 @@ export const Post = ({ post }) => {
                   </div>
                   <div className="postCenter">
                       <span className='postText'>{post.desc}</span>
-                      <img src={PUBLIC_FOLDER + post.photo} alt="" className='postImg' />
+                      <img src={PUBLIC_FOLDER + post.img} alt="" className='postImg' />
                   </div>
                   <div className="postBottom">
                       <div className="postBottomLeft">
