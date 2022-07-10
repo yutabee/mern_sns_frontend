@@ -8,6 +8,8 @@ export const Post = ({ post }) => {
     // console.log(user);
     // console.log(post);
 
+    const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER; 
+
     const [like, setLike] = useState(post.like);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -22,7 +24,7 @@ export const Post = ({ post }) => {
               <div className="postWrapper">
                   <div className="postTop">
                       <div className="postTopLeft">
-                           <img src="./assets/person/1.jpeg" alt="" className='postProfileImg' />
+                          <img src={ PUBLIC_FOLDER + "/person/1.jpeg"} alt="" className='postProfileImg' />
                           <span className='postUserName'>{ Users.filter(user=>user.id===post.userId)[0].username }</span>
                           <span className='postDate'>{post.date}</span>
                       </div> 
@@ -32,11 +34,11 @@ export const Post = ({ post }) => {
                   </div>
                   <div className="postCenter">
                       <span className='postText'>{post.desc}</span>
-                      <img src={post.photo} alt="" className='postImg' />
+                      <img src={PUBLIC_FOLDER + post.photo} alt="" className='postImg' />
                   </div>
                   <div className="postBottom">
                       <div className="postBottomLeft">
-                          <img src="./assets/heart.png" alt="" className='likeIcon' onClick={()=>handleLike()} />
+                          <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className='likeIcon' onClick={()=>handleLike()} />
                           <span className="postLikeCounter">
                               {like}人がいいねを押しました
                           </span>
