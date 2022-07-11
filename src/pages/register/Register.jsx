@@ -9,7 +9,7 @@ export const Register = () => {
   const password = useRef();
   const passwordConfirmation = useRef();
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
 const handleSubmit = async(e) => {
   e.preventDefault(); 

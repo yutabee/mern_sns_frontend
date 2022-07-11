@@ -3,7 +3,18 @@ import { AuthReducer } from "./AuthReducer";
 
 //最初のユーザー状態を管理
 const initialState = {
-    user: null,
+    // user: null,
+    user: {
+        _id:"62c41b1985dccbf023a2c219",
+        username:"Yuuutabee",
+        email:"example@example.com",
+        password:"password",
+        profilePicture:"/person/1.jpeg",
+        coverPicture:"",
+        followers: Array,
+        followings:Array,
+        isAdmin:false,
+    },
     isFetching: false,
     error: false,  
 };

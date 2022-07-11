@@ -13,7 +13,7 @@ export const Rightbar = ({ user }) => {
           <img src="assets/star.png" alt="" className='starImg' />
           <span className='eventText'><b>フォロワー限定</b>イベント開催中！</span>
         </div>
-        <img src="/event.jpeg" alt="" className='eventImg' />
+        <img src="assets/event.jpeg" alt="" className='eventImg' />
         <h4 className="rightbarTitle">オンラインの友達</h4>
         <ul className='rightbarFriendList'>
           {Users.map((user) => (
