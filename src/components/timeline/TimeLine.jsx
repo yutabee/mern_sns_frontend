@@ -16,7 +16,11 @@ export const TimeLine = ({username}) => {
         ? await axios.get(`/posts/profile/${username}`)      //プロフィールの場合
         : await axios.get(`/posts/timeline/${user._id}`);  //ホームの場合
       // console.log(response);
-      setPosts(response.data);  //apiのresのdataをset
+      setPosts(
+        response.data.sort((post1, post2) => {
+          return new Date(post2.createdAt) - new Date(post1.createdAt);  //投稿を新しい順でソート
+        })
+      );//apiのresのdataをset
     };
     fetchPosts();  //忘れず呼び出す
    }, [username]);  //第2引数は関心のあるstateや変数を格納できる,今回はなし

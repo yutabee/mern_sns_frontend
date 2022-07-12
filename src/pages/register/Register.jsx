@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 
 export const Register = () => {
@@ -48,8 +48,10 @@ const handleSubmit = async(e) => {
                           <input type="email" className='loginInput' placeholder='Eメール' required ref={email}/>
                           <input type="password" className='loginInput' placeholder='パスワード' required minLength="6" ref={password}/>
                           <input type="password" className='loginInput' placeholder='確認用パスワード' required minLength="6" ref={passwordConfirmation}/>
-                          <button className='loginButton'type='submit'>サインアップ</button>
-                          <button className='loginRegisterButton'>ログイン</button>
+              <button className='loginButton' type='submit'>サインアップ</button>
+              <Link to='/login'>
+              <button className='loginRegisterButton'>ログイン</button>
+              </Link>
                     </form>
                   </div>
               </div>    

@@ -1,14 +1,15 @@
 import { Analytics, Face, Gif, Image } from '@mui/icons-material';
 import axios from 'axios';
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../state/AuthContext';
 import './Share.css'
 
 export const Share = () => {
     const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER; 
-
     const { user } = useContext(AuthContext);
     const desc = useRef();
+    const [file, setFile] = useState(null);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,6 +18,21 @@ export const Share = () => {
             userId: user._id,
             desc: desc.current.value,
         };
+
+            if (file) {
+                const data = new FormData();  //キーとバリューを合わせてデータとする
+                const fileName = Date.now() + file.name;  
+                data.append("name", fileName);  //appendでkeyを指定
+                data.append("file", file);  
+                newPost.img = fileName;  //postにfilenameを保存
+                console.log(newPost);
+            try {
+                //画像APIを叩く
+                await axios.post("/upload", data);
+            } catch (err) {
+                console.log(err);
+            }
+            }
 
         try {
             await axios.post('/posts', newPost);
@@ -37,10 +53,17 @@ export const Share = () => {
                 <hr className="shareHr" />
                   <form className="shareButtons" onSubmit={(e)=>handleSubmit(e)}>
                       <div className="shareOptions">
-                          <div className="shareOption">
+                          <label className="shareOption" htmlFor='file'>
                               <Image className='shareIcon' htmlColor='blue' />
                               <span className='shareOptionText'>写真</span>
-                          </div>
+                              <input
+                                  type="file"
+                                  id='file' accept='.png, .jpeg, .jpg'
+                                  style={{ display: "none" }}
+                                  onChange={(e) => setFile(e.target.files[0])}
+                                  name="file"
+                              />
+                          </label>
                            <div className="shareOption">
                               <Gif className='shareIcon' htmlColor='hotpink' />
                               <span className='shareOptionText'>GIF</span>
