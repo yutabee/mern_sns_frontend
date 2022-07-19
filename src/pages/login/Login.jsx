@@ -19,7 +19,7 @@ export const Login = () => {
 
     loginCall({
       email: email.current.value,
-      password: password.current.value
+      password: password.current.value,
     },
       dispatch
     );
